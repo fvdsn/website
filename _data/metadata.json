@@ -1,21 +1,22 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
+  "title": "Frédéric van der Essen",
+  "url": "https://frederic.vanderessen.com",
   "language": "en",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "description": "Essays by Frédéric van der Essen",
+  "archiveSize": 5,
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Essays by Frédéric van der Essen",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://example.com/"
+    "id": "https://frederic.vanderessen.com"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://example.com/feed/feed.json"
+    "url": "https://frederic.vanderessen.com/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "Frédéric van der Essen",
+    "email": "fvdessen@gmail.com",
+    "url": "https://frederic.vanderessen.com"
   }
 }
