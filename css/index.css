@@ -216,6 +216,11 @@ code {
   line-height: 1.8;
   position: relative;
 }
+@media (pointer: coarse) {
+    .postlist-item {
+        height: 48px;
+    }
+}
 /*.postlist-item:before {
   position: absolute;
 
