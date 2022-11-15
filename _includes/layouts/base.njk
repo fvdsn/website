@@ -18,9 +18,7 @@
                     {% if page.url == '/' %}
                         Frédéric van der Essen's webpage
                     {% else %}
-                        <a href="{{ '/' | url }}">
-                            [Home]
-                        </a>
+                        [ <a href="{{ '/' | url }}" class="nodec">home</a> ]
                     {% endif %}
                 </h1>
 
@@ -42,9 +40,7 @@
 
             {% if page.url != '/' %}
             <footer class='bottom-nav'>
-                <a href="{{ '/' | url }}">
-                    [Home]
-                </a>
+                [ <a href="{{ '/' | url }}" class="nodec">home</a> ]
                 <a class='feed-icon-link' href='/feed/feed.xml'>
                     <img class='feed-icon' src='/img/rss.png' alt='RSS'></img>
                 </a>

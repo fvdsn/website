@@ -2,10 +2,12 @@
 :root {
   --lightgray: #e0e0e0;
   --gray: #C0C0C0;
-  --darkgray: #422a60;
+  --darkgray: #1d345e;
   --navy: #17050F;
   --blue: #082840;
   --white: #fff;
+  --link: #367ad1;
+  --block: #f2f2fc;
 }
 
 /* Global stylesheet */
@@ -33,6 +35,8 @@ body {
 .mt-3 { margin-top: 3rem; }
 .mt-4 { margin-top: 4rem; }
 .mt-5 { margin-top: 5rem; }
+.nodec { text-decoration: none; }
+.nodec:hover { text-decoration: underline; }
 .page {
     max-width: 600px;
     margin-left: auto;
@@ -41,6 +45,9 @@ body {
 .top-nav,
 .bottom-nav {
     padding: 0 2.5rem;
+}
+.top-nav {
+    margin-top: 2rem;
 }
 .tmpl-post, .tmpl-home {
     margin-top: 3rem;
@@ -54,7 +61,7 @@ p:last-child {
 p,
 .tmpl-post li,
 img {
-  max-width: 37.5em; /* 600px /16 */
+  max-width: 100%; /* 600px /16 */
 }
 p,
 .tmpl-post li {
@@ -62,7 +69,7 @@ p,
   margin-bottom: 1em;
 }
 a[href] {
-  color: #8d63da;
+  color: var(--link);
 }
 a[href]:visited {
   color: var(--darkgray);
@@ -97,7 +104,7 @@ pre,
 code {
   font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
   line-height: 1.5;
-  background-color: #f5f1fa;
+  background-color: var(--block);
 }
 pre {
   font-size: 14px;
@@ -239,10 +246,6 @@ code {
 .postlist-item-active .postlist-link {
   font-weight: bold;
 }
-.tmpl-home .postlist-link {
-  font-size: 1.15rem; /* 19px /16 */
-  font-weight: 700;
-}
 
 
 /* Tags */
@@ -320,13 +323,13 @@ blockquote {
 }
 *::selection {
     text-shadow: none;
-    background: black;
+    background: var(--darkgray);
     color: white;
 }
 @media(prefers-color-scheme: dark) {
     *::selection {
         background: white;
-        color: black;
+        color: var(--darkgray);
     }
 }
 
