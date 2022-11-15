@@ -8,6 +8,7 @@
   --white: #fff;
   --link: #367ad1;
   --block: #f2f2fc;
+  --darkblock: #191923;
 }
 
 /* Global stylesheet */
@@ -105,6 +106,12 @@ code {
   font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
   line-height: 1.5;
   background-color: var(--block);
+}
+@media(prefers-color-scheme: dark) {
+    pre,
+    code {
+        background-color: var(--darkblock);
+    }
 }
 pre {
   font-size: 14px;
