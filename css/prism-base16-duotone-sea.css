@@ -27,7 +27,7 @@ pre[class*="language-"] {
     -ms-hyphens: none;
     hyphens: none;
     background: white;
-    color: black;
+    color: #1d345e;
 
 }
 @media(prefers-color-scheme: dark) {
@@ -46,14 +46,14 @@ pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selectio
 code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
     text-shadow: none;
     background: #BBB;
-    color: black;
+    color: #1d345e;
 }
 
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
     text-shadow: none;
     background: #EEE;
-    color: black;
+    color: #1d345e;
 }
 
 /* Code blocks */
@@ -61,7 +61,7 @@ pre[class*="language-"] {
     padding: 0.6rem 1em;
     margin: 3rem 0;
     overflow: auto;
-    border: solid 2px black;
+    border: solid 2px #1d345e;
 }
 @media(prefers-color-scheme: dark) {
     pre[class*="language-"] {
@@ -93,7 +93,7 @@ pre[class*="language-"] {
 .token.tag,
 .token.operator,
 .token.number {
-    color: black;
+    color: #1d345e;
 }
 @media(prefers-color-scheme: dark) {
     .token.tag,
@@ -104,19 +104,19 @@ pre[class*="language-"] {
 }
 
 .token.function {
-    color: black;
+    color: #1d345e;
     font-weight: 500;
 }
 
 .token.tag-id,
 .token.selector,
 .token.atrule-id {
-    color: black;
+    color: #1d345e;
 }
 
 code.language-javascript,
 .token.attr-name {
-    color: black;
+    color: #1d345e;
 }
 
 code.language-css,
@@ -136,13 +136,13 @@ code.language-scss,
 .token.statement,
 .token.regex,
 .token.atrule {
-    color: black;
+    color: #1d345e;
     font-weight: 700;
 }
 
 .token.placeholder,
 .token.variable {
-    color: black;
+    color: #1d345e;
 }
 @media(prefers-color-scheme: dark) {
     .token.function {
@@ -203,7 +203,7 @@ code.language-scss,
 }
 
 .token.important {
-    color: black;
+    color: #1d345e;
 }
 @media(prefers-color-scheme: dark) {
     .token.important {
@@ -216,7 +216,7 @@ code.language-scss,
 }
 
 pre > code.highlight {
-    outline: .4em solid black;
+    outline: .4em solid #1d345e;
     outline-offset: .4em;
 }
 
