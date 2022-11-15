@@ -63,6 +63,8 @@ p,
 .tmpl-post li,
 img {
   max-width: 100%; /* 600px /16 */
+  width: auto;
+  height: auto;
 }
 p,
 .tmpl-post li {
