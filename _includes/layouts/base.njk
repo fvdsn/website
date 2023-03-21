@@ -6,9 +6,9 @@
         <title>{{ title or metadata.title }}</title>
         <meta name="description" content="{{ description or metadata.description }}">
         <link rel="icon" type="image/png" href="/img/favicon.png">
-        <link rel="stylesheet" href="{{ '/css/fonts.css' | url }}">
+        <link rel="stylesheet" href="{{ '/css/fonts.css' | url }}" rel="preload">
         <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
-        <link rel="stylesheet" href="{{ '/css/prism-base16-duotone-sea.css' | url }}">
+        <!-- <link rel="stylesheet" href="{{ '/css/prism-base16-duotone-sea.css' | url }}"> SLOW! -->
         <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
         <link rel="alternate" href="{{ metadata.jsonfeed.path | url }}" type="application/json" title="{{ metadata.title }}">
     </head>
