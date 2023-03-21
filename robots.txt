@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://frederic.vanderessen.com/sitemap.xml
