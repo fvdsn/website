@@ -1,7 +1,7 @@
 ---
 title: GPT-4 Can Use Tools, Serve a REST API, Pilot Drones and Drop Grenades
 description: By teaching GPT-4 to use tools, you can have it work as an autonomous agent that can perform high level tasks. 
-date: 2023-03-15
+date: 2023-03-22
 layout: layouts/post.njk
 ---
 
