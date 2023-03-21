@@ -356,4 +356,20 @@ blockquote {
         color: var(--darkgray);
     }
 }
-
+@media print {
+    .noprint {
+        display: none !important;
+    }
+    :root {
+      --lightgray: #e0e0e0;
+      --gray: #C0C0C0;
+      --darkgray: black;
+      --navy: #17050F;
+      --blue: #082840;
+      --white: #fff;
+      --link: black;
+      --block: white;
+      --darkblock: #191923;
+      --placeholder: #f0f0f0;
+    }
+}
