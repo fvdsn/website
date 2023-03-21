@@ -315,6 +315,9 @@ img.feed-icon {
     float: right;
     margin-left: 0.2em;
 }
+.fr {
+    float: right;
+}
     
 
 /* Direct Links / Markdown Headers */

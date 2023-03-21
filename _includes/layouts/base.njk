@@ -42,12 +42,10 @@
             {% if page.url != '/' %}
             <footer class='bottom-nav'>
                 [ <a href="{{ '/' | url }}" class="nodec">home</a> ]
-                <a class='feed-icon-link' href='/feed/feed.xml'>
-                    <img class='feed-icon' src='/img/rss.png' alt='RSS'></img>
-                </a>
-                <a class='feed-icon-link' href='/feed/feed.json'>
-                    <img class='feed-icon' src='/img/jsonfeed.png' alt='JsonFeed'></img>
-                </a>
+                <span class='fr'>
+                    [ <a href='/feed/feed.xml' class='nodec'>rss</a> ]
+                    [ <a href='/feed/feed.json' class='nodec'>jsonfeed</a> ]
+                </span>
             </footer>
             {% endif %}
         </main>
