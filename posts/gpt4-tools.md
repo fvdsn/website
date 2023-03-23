@@ -91,7 +91,11 @@ But maybe all it would take to prevent this is to ask ChatGPT to do some introsp
 
 Oops...
 
-Now I'm going to try to give a positive spin to this ending. If you are afraid that AI getting smarter means they will be able to do bad things, it seems it will also help them not do bad things !
+Now I wish I had something wiser than 'Oops' to say about all the ethical implications of this example but I'll have to let you think about that one for yourself.
+
+And there may be a way to put a small positive spin to this ending. If you are afraid that AI getting smarter means they will be able to do bad things, it seems it will also help them avoid doing bad things ! Yay !
+
+---
 
 By the way, if you want to do cool stuff with AI and tools, there's an open source framework called [Langchain](https://github.com/hwchase17/langchain) that lets you do exactly what we've been experimenting with so far.
 
