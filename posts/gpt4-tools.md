@@ -97,7 +97,7 @@ And there may be a way to put a small positive spin to this ending. If you are a
 
 ---
 
-By the way, if you want to do cool stuff with AI and tools, there's an open source framework called [Langchain](https://github.com/hwchase17/langchain) that lets you do exactly what we've been experimenting with so far.
+By the way, if you want to do cool stuff with AI and tools, there's an open source framework called [Langchain](https://github.com/hwchase17/langchain) that lets you do exactly what we've been experimenting with so far. And if you want to read about other interesting GPT-4 experiments like these [this paper is amazing](https://arxiv.org/pdf/2303.12712.pdf).
 
 ---
 

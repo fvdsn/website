@@ -15,6 +15,7 @@
 /* Global stylesheet */
 * {
   box-sizing: border-box;
+  text-underline-offset: 3px;
 }
 
 html,
@@ -76,6 +77,9 @@ p,
 .tmpl-post li {
   line-height: 1.45;
   margin-bottom: 1em;
+}
+.tmpl-post br {
+  display: none;
 }
 a[href] {
   color: var(--link);
@@ -255,10 +259,10 @@ code {
 }
 .postlist-link {
   padding-right: .25em;
-  text-decoration: none;
-  text-underline-position: from-font;
+  text-underline-offset: 3px;
+ /* text-underline-position: from-font;
   text-underline-offset: 0;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 1px;*/
   flex: auto;
 }
 .postlist-link:hover {
