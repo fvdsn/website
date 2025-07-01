@@ -1,12 +1,9 @@
-
 ---
 title: What Is Good For AIs Is Good For Humans, A Miracle
 description: Comments, unit tests, clean code ? Good for AI, Good for Humans !
 date: 2025-07-01
 layout: layouts/post.njk
 ---
-What Is Good For AIs Is Good For Humans, A Miracle
-=======================================================
 
 I have discovered something marvelous; whatever you do
 to make the AIs more effective at helping you do your job
