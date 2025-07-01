@@ -1,5 +1,5 @@
 ---
-title: What Is Good For AIs Is Good For Humans, A Miracle
+title: What Is Good For AIs Is Good For Humans
 description: Comments, unit tests, clean code ? Good for AI, Good for Humans !
 date: 2025-07-01
 layout: layouts/post.njk
