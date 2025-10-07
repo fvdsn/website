@@ -36,6 +36,7 @@ deduplication afterwards than start with CAS and decide later on that it
 was not needed.
 
 There are of course a few good uses of CAS, such as git, where the whole point is that the
-referenced version of a document is never deleted
+referenced version of a document is never deleted, or short term caches where it's always going to be
+deleted.
 
 That is at least my experience after working on systems that handled many many files.
