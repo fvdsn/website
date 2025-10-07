@@ -1,7 +1,7 @@
 ---
 title: Never Ever Use Content Addressable Storage
 description: Unless you really know what you are doing
-date: 2025-10-7
+date: 2025-10-07
 layout: layouts/post.njk
 ---
 
