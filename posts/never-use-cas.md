@@ -40,3 +40,8 @@ referenced version of a document is never deleted, or short term caches where it
 deleted.
 
 That is at least my experience after working on systems that handled many many files.
+
+_afterword: Some readers have commented that you might solve the problem by hashing `${user_id}_${picture_data}`
+but it is still a bad idea, as you are still hardcoding at the storage layer business decisions on how
+the data is owned. In this case the assumption is that a user only uploads the same picture once. If the user uploads
+it twice but then wants to delete one of them, then the problem you thought solved reappears._
