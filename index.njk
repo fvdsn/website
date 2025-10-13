@@ -10,6 +10,9 @@ eleventyNavigation:
 {% set maxPosts = collections.posts.length | min(metadata.archiveSize) %}
 <h2 class='mt-5'>
     Articles
+    <span class='title-aside'>
+      [ <a href="{{ '/feed/feed.xml' | url }}" class="nodec">rss</a> ]
+    </span>
 </h2>
 
 {% set postslist = collections.posts | head(-metadata.archiveSize) %}
