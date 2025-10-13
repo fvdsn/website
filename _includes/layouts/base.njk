@@ -7,7 +7,7 @@
         <meta name="description" content="{{ description or metadata.description }}">
         <link rel="icon" type="image/png" href="/img/favicon.png">
         {% if page.url == '/' %}
-        <link rel="preload" href="{{ '/img/field-blue.jpg' | url }}" as="image">
+        <link rel="preload" href="{{ '/img/field-blue-small.jpg' | url }}" as="image">
         {% endif %}
         <link rel="preload" href="{{ '/fonts/inter-v7-latin-ext_latin-regular.woff2' | url }}" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ '/fonts/inter-v7-latin-ext_latin-700.woff2' | url }}" as="font" type="font/woff2" crossorigin>
@@ -29,7 +29,7 @@
                 </h1>
 
                 {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-                {#- 
+                {#-
                 <ul class="nav">
                     {%- for entry in collections.all | eleventyNavigation %}
                     {% if entry.key != 'Archive' or collections.posts.length > metadata.archiveSize %}
