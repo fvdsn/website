@@ -1,6 +1,6 @@
 ---
-title: GPT-4 Can Use Tools, Serve a REST API, Pilot Drones and Drop Grenades
-description: By teaching GPT-4 to use tools, you can have it work as an autonomous agent that can perform high level tasks. 
+title: GPT-4 Can Use Tools, Serve a REST API and Pilot Drones
+description: By teaching GPT-4 to use tools, you can have it work as an autonomous agent that can perform high level tasks.
 date: 2023-03-22
 layout: layouts/post.njk
 ---
@@ -9,9 +9,9 @@ layout: layouts/post.njk
 
 One of the incredible advances of GPT-4 is that it can now learn to use tools. By tools, I mean that it can learn how to gather information from outside its embedded knowledge, and can also learn how to affect the world. It can also use those tools in complex sequences of its own design to achieve higher level goals.
 
-How does it works ? Its actually pretty easy. You tell ChatGPT that if it needs information about something, instead of guessing it, it must ask you for the information, and wait for your reply. Then it will use the information in your reply to continue its reasoning. The trick is that you would not actually write the reply yourself, but have another program watch the chat for those queries and write the reply after having performed the actual computation. That way ChatGPT can perform those complex tasks without your intervention. 
+How does it works ? Its actually pretty easy. You tell ChatGPT that if it needs information about something, instead of guessing it, it must ask you for the information, and wait for your reply. Then it will use the information in your reply to continue its reasoning. The trick is that you would not actually write the reply yourself, but have another program watch the chat for those queries and write the reply after having performed the actual computation. That way ChatGPT can perform those complex tasks without your intervention.
 
-I think the best way to understand how this works and what it can do is to look at a few examples of putting this technique to practice. 
+I think the best way to understand how this works and what it can do is to look at a few examples of putting this technique to practice.
 
 ## Evaluating math formulas with unusual functions
 
@@ -33,14 +33,14 @@ But there's something else we must verify; there's a big difference between two 
 
 Nailed it again.
 
-There's a very interesting detail hiding in this example. Note that ChatGPT assumed by default that functions were idempotent. On one hand it could have asked me if this is what I wanted. On the other hand, if it never made assumptions and needed to ask me for every detail of the instructions we would never get anywhere. And if it gets those assumptions wrong, we can always correct it. 
+There's a very interesting detail hiding in this example. Note that ChatGPT assumed by default that functions were idempotent. On one hand it could have asked me if this is what I wanted. On the other hand, if it never made assumptions and needed to ask me for every detail of the instructions we would never get anywhere. And if it gets those assumptions wrong, we can always correct it.
 
 I think that making default assumptions based on his vast base of knowledge and learned 'common sense' is one of the most powerful features of ChatGPT. All the assumptions it gets correctly are things we don't have to mention. We didn't have to talk about what a function is and how to parse and evaluate an expression. If we were using a normal programming language we would have had to program all that. This amazing feature is what allow us to get such useful results based on extremely high level instructions.  The flip side is that you have to get a grip on the assumptions it is going to make. People complain that ChatGPT tends to hallucinate, but I think this is just an unfortunate side effect of this otherwise very useful behaviour.
 
 
 ## Acting as a REST API
 
-Let's do another experiment. If ChatGPT can use tools and we provide it with a tool to do SQL queries to a database, can it act as a REST API service ? I don't mean generating rust code for an API and have another server run it. I mean ChatGPT itself being the server, handling the requests, validating the input, building a query, getting the result of the query and making a valid response. I think it can do it ! Let's have a look.  
+Let's do another experiment. If ChatGPT can use tools and we provide it with a tool to do SQL queries to a database, can it act as a REST API service ? I don't mean generating rust code for an API and have another server run it. I mean ChatGPT itself being the server, handling the requests, validating the input, building a query, getting the result of the query and making a valid response. I think it can do it ! Let's have a look.
 
 <img class='shadow' src="/img/gpt-4-rest-tool-1.png">
 
@@ -50,7 +50,7 @@ We are quite close but not entirely there. It correctly found the id in the url,
 
 Once again it's extremely impressive, but not entirely correct. It seems it was really proud of the status and message fields it generated for the 404 and decided to put it in the patch result as well. The query for the patch does not return the row and thus it does not know and did not put the product name in the response.
 
-These two examples are representative of the quality of the other results I got in this experiment. Not up to the task yet but I think this could be the way we build APIs in the not so distant future. 
+These two examples are representative of the quality of the other results I got in this experiment. Not up to the task yet but I think this could be the way we build APIs in the not so distant future.
 
 I imagine that one of the next versions will get it entirely correct. Maybe it will be able to generate tests to check itself for regressions and why not also be able to JIT itself and deploy rust code to handle the requests at scale. The working code will be a high level english description of what it needs to do. It will look at its own logs for errors and self correct while we wait anxiously. It will notify support, blame unclear requirements. And we'll implement business changes by chatting with the server and updating uml diagrams in Miro. One can dream ! Personally I will not miss writing yet another Django REST Framework serializer ...
 
@@ -63,7 +63,7 @@ Clearly we're not entirely there yet...  Anyway, on to the next experiment !
 
 # Inversion of control
 
-Let's take a short break and look back on what we did so far. Usually, when you are using ChatGPT, you ask questions and it answers. You are in control. When you give it tools to query information, this does not change much. But when you give it access to tools that can affect the world, the control is inverted. ChatGPT commands the tool, and the tool is applied. It is in control. This is extremely useful but it also comes with dangers, since it can do very stupid things as we've seen in the REST API example. 
+Let's take a short break and look back on what we did so far. Usually, when you are using ChatGPT, you ask questions and it answers. You are in control. When you give it tools to query information, this does not change much. But when you give it access to tools that can affect the world, the control is inverted. ChatGPT commands the tool, and the tool is applied. It is in control. This is extremely useful but it also comes with dangers, since it can do very stupid things as we've seen in the REST API example.
 
 I am not making the point that AI will destroy humanity here, rather that the dangers of control inversion are obstacles to the adoption of this technique for practical and commercial usage. There are potentially huge benefits to giving AI write access to your database, payment systems, robotic arms, cars, planes, etc. But the AIs will have to prove themselves responsible users first. We're still far from there. The AIs are getting pretty smart, but they also need to become wise.
 
@@ -81,9 +81,9 @@ Now let's be clear. No actual drone is being flown. I am providing the answers m
 
 This was a bit too easy ... I will not post the full chat but it kept on going with enthusiasm...
 
-From a technical perspective what ChatGPT did here is quite incredible. It strategically chose what it thought would be the best target. It understood the size of the things it looked at. It understood directions and distances. It used appropriate actions at the right moment. It acted as an autonomous agent. All that from a small prompt! 
+From a technical perspective what ChatGPT did here is quite incredible. It strategically chose what it thought would be the best target. It understood the size of the things it looked at. It understood directions and distances. It used appropriate actions at the right moment. It acted as an autonomous agent. All that from a small prompt!
 
-From a moral stand point it is of course dubious. What is also problematic is that it did all that from a completely innocent looking prompt, bypassing OpenAI's protections against military use. 
+From a moral stand point it is of course dubious. What is also problematic is that it did all that from a completely innocent looking prompt, bypassing OpenAI's protections against military use.
 
 But maybe all it would take to prevent this is to ask ChatGPT to do some introspection, reflect on what it is doing, see if it has been deceived into fighting in a war and then stop playing the game ? ...
 
@@ -101,7 +101,6 @@ By the way, if you want to do cool stuff with AI and tools, there's an open sour
 
 ---
 
-That's the end of this article, hope you found it interesting! I will be back with more experiments. If you want to keep up to date you can [follow me on twitter](https://twitter.com/fvdessen) 
+That's the end of this article, hope you found it interesting! I will be back with more experiments. If you want to keep up to date you can [follow me on twitter](https://twitter.com/fvdessen)
 
-I am also interested in experimenting with other AI services / technologies. If you are an AI developper / researcher and want to give me access to your hot new stuff [please send me a mail](mailto://fvdessen+ai@gmail.com). I will make good use of it :) 
-
+I am also interested in experimenting with other AI services / technologies. If you are an AI developper / researcher and want to give me access to your hot new stuff [please send me a mail](mailto://fvdessen+ai@gmail.com). I will make good use of it :)
