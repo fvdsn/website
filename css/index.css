@@ -15,7 +15,8 @@
 /* Global stylesheet */
 * {
   box-sizing: border-box;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
 }
 
 html,
@@ -75,6 +76,13 @@ body {
 .tmpl-home {
   margin-top: 3rem;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+}
 h2 {
   margin-top: 3rem;
 }
@@ -100,6 +108,7 @@ img.shadow {
 }
 p,
 .tmpl-post li {
+  font-weight: 350;
   line-height: 1.45;
   margin-bottom: 1em;
 }
@@ -287,14 +296,7 @@ code {
 }
 .postlist-link {
   padding-right: 0.25em;
-  text-underline-offset: 3px;
-  /* text-underline-position: from-font;
-  text-underline-offset: 0;
-  text-decoration-thickness: 1px;*/
   flex: auto;
-}
-.postlist-link:hover {
-  text-decoration: underline;
 }
 .postlist-item-active .postlist-link {
   font-weight: bold;
