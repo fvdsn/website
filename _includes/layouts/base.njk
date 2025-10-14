@@ -5,6 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ title or metadata.title }}</title>
         <meta name="description" content="{{ description or metadata.description }}">
+
+        {# Open Graph meta tags for social media previews #}
+        <meta property="og:title" content="{{ title or metadata.title }}">
+        <meta property="og:description" content="{{ description or metadata.description }}">
+        <meta property="og:type" content="{% if templateClass == 'tmpl-post' %}article{% else %}website{% endif %}">
+        <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+        <meta property="og:site_name" content="{{ metadata.title }}">
+        {% if image %}
+        <meta property="og:image" content="{{ metadata.url }}{{ image }}">
+        {% else %}
+        <meta property="og:image" content="{{ metadata.url }}/img/field-blue-small.jpg">
+        {% endif %}
+
+        {# Twitter Card meta tags #}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ title or metadata.title }}">
+        <meta name="twitter:description" content="{{ description or metadata.description }}">
+        {% if image %}
+        <meta name="twitter:image" content="{{ metadata.url }}{{ image }}">
+        {% else %}
+        <meta name="twitter:image" content="{{ metadata.url }}/img/field-blue-small.jpg">
+        {% endif %}
+
         <link rel="icon" type="image/png" href="/img/favicon2.png">
         {% if page.url == '/' %}
         <link rel="preload" href="{{ '/img/field-blue-small.jpg' | url }}" as="image">
