@@ -5,9 +5,7 @@
 :root {
   --lightgray: #e0e0e0;
   --gray: #c0c0c0;
-  --darkgray: #1d345e;
-  --navy: #17050f;
-  --blue: #082840;
+  --darkblue: #1d345e;
   --white: #fff;
   --link: #2e5eab;
   --block: #f2f2fc;
@@ -35,7 +33,7 @@ body {
     system-ui,
     sans-serif;
   font-size: 15px;
-  color: var(--darkgray);
+  color: var(--darkblue);
   background-color: var(--white);
 }
 
@@ -78,7 +76,7 @@ a[href] {
 }
 
 a[href]:visited {
-  color: var(--darkgray);
+  color: var(--darkblue);
 }
 
 blockquote {
@@ -163,7 +161,7 @@ article :first-child {
   left: -24px;
   top: 12px;
   font-size: 0.8125em; /* 13px /16 */
-  color: var(--darkgray);
+  color: var(--darkblue);
 }
 
 .postlist-date {
@@ -210,7 +208,7 @@ ul.linklist li {
   margin-left: 0.6666666666667em; /* 8px /12 */
   margin-top: 0.5em; /* 6px /12 */
   margin-bottom: 0.5em; /* 6px /12 */
-  color: var(--darkgray);
+  color: var(--darkblue);
   border: 1px solid var(--gray);
   border-radius: 0.25em; /* 3px /12 */
   text-decoration: none;
@@ -376,7 +374,7 @@ code {
 /* Text Selection */
 *::selection {
   text-shadow: none;
-  background: var(--darkgray);
+  background: var(--darkblue);
   color: white;
 }
 
@@ -416,7 +414,7 @@ code {
 
   *::selection {
     background: white;
-    color: var(--darkgray);
+    color: var(--darkblue);
   }
 }
 
@@ -436,13 +434,11 @@ code {
   :root {
     --lightgray: #e0e0e0;
     --gray: #c0c0c0;
-    --darkgray: black;
-    --navy: #17050f;
-    --blue: #082840;
-    --white: #fff;
+    --darkblue: black;
+    --white: white;
     --link: black;
     --block: white;
-    --darkblock: #191923;
+    --darkblock: black;
     --placeholder: #f0f0f0;
   }
 }
