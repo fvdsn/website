@@ -86,6 +86,10 @@ blockquote {
   font-style: italic;
 }
 
+.navlink {
+  font-weight: 400;
+}
+
 /* ==========================================================================
    Layout
    ========================================================================== */
@@ -365,10 +369,6 @@ code {
 
 .fr {
   float: right;
-}
-
-.noprint {
-  /* Used in print media query */
 }
 
 /* Text Selection */

@@ -10,7 +10,7 @@ eleventyNavigation:
 {% set maxPosts = collections.posts.length | min(metadata.archiveSize) %}
 <h2 class='mt-5'>
     Articles
-    <span class='title-aside'>
+    <span class='title-aside navlink'>
       [ <a href="{{ '/feed/feed.xml' | url }}" class="nodec">rss</a> ]
     </span>
 </h2>
@@ -20,7 +20,7 @@ eleventyNavigation:
 {% include "postslist.njk" %}
 
 {% if collections.posts.length > metadata.archiveSize %}
-<p>[ <a href="{{ '/posts/' | url }}" class="nodec">archive</a> ]</p>
+<p><span class='navlink'>[ <a href="{{ '/posts/' | url }}" class="nodec">archive</a> ]</span></p>
 {% endif %}
 
 <h1 class='mt-5'>Hello :)</h1>

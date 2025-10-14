@@ -28,7 +28,7 @@
                     {% if page.url == '/' %}
                         Frédéric van der Essen's webpage
                     {% else %}
-                        <span class='noprint'>[ <a href="{{ '/' | url }}" class="nodec">home</a> ]</span>
+                        <span class='noprint navlink'>[ <a href="{{ '/' | url }}" class="nodec">home</a> ]</span>
                     {% endif %}
                 </h1>
 
@@ -50,10 +50,10 @@
 
             {% if page.url != '/' %}
             <footer class='bottom-nav noprint'>
-                [ <a href="{{ '/' | url }}" class="nodec">home</a> ]
+                <span class='navlink'>[ <a href="{{ '/' | url }}" class="nodec">home</a> ]</span>
                 <span class='fr'>
-                    [ <a href='/feed/feed.xml' class='nodec'>rss</a> ]
-                    [ <a href='/feed/feed.json' class='nodec'>jsonfeed</a> ]
+                    <span class='navlink'>[ <a href='/feed/feed.xml' class='nodec'>rss</a> ]</span>
+                    <span class='navlink'>[ <a href='/feed/feed.json' class='nodec'>jsonfeed</a> ]</span>
                 </span>
             </footer>
             {% endif %}
