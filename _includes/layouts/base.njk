@@ -33,7 +33,7 @@
 
         <link rel="icon" type="image/png" href="/img/favicon2.png">
         {% if page.url == '/' %}
-        <link rel="preload" href="{{ '/img/field-blue-small.jpg' | url }}" as="image">
+        <link rel="preload" fetchpriority=high href="{{ '/img/field-blue-small.jpg' | url }}" as="image">
         {% endif %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
