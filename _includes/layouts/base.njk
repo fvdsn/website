@@ -14,8 +14,10 @@
         <meta property="og:site_name" content="{{ metadata.title }}">
         {% if image %}
         <meta property="og:image" content="{{ metadata.url }}{{ image }}">
+        <meta property="og:image:secure_url" content="{{ metadata.url }}{{ image }}">
         {% else %}
         <meta property="og:image" content="{{ metadata.url }}/img/field-blue-small.jpg">
+        <meta property="og:image:secure_url" content="{{ metadata.url }}/img/field-blue-small.jpg">
         {% endif %}
 
         {# Twitter Card meta tags #}
