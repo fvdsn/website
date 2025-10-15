@@ -19,8 +19,24 @@
 
 * {
   box-sizing: border-box;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.08rem;
+}
+
+* {
+  outline: #ff880032;
+  outline-width: 1px;
+  /*outline-style: solid;*/
+}
+
+html {
+  font-size: 62.5%; /* 1.rem == 10px */
+}
+@media screen and (max-width: 1512px) and (min-resolution: 2dppx) {
+  /* macbook pro show things waaayyy too big by default , scale down by 80%, makes it similar to 1920x1080; */
+  html {
+    font-size: 50%;
+  }
 }
 
 html,
@@ -49,22 +65,51 @@ h5 {
   font-weight: 600;
 }
 
+h1 {
+  font-size: 2.1rem;
+  line-height: 2.8rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1.4rem;
+}
+
 h2 {
-  margin-top: 3rem;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+  margin-top: 2.8rem;
+  margin-bottom: 0.7rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  line-height: 2.1rem;
+  margin-bottom: 0.7rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  margin-bottom: 0.7rem;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.4rem;
+  margin-bottom: 0.7rem;
 }
 
 h2 .title-aside {
+  padding-top: 0.4rem;
   float: right;
-  font-size: 15px;
-  line-height: 1.5em;
+  font-size: 1rem;
+  line-height: 1.4rem;
   font-weight: normal;
 }
 
 p,
 .tmpl-post li {
   font-weight: 350;
-  line-height: 1.45;
-  margin-bottom: 1em;
+  line-height: 1.4rem;
+  margin-bottom: 0.7rem;
 }
 
 p:last-child {
@@ -86,8 +131,39 @@ blockquote {
   font-style: italic;
 }
 
+time {
+  display: inline-block;
+  height: 1.4rem;
+  line-height: 1.4rem;
+}
+
 .navlink {
   font-weight: 400;
+  line-height: 1.4rem;
+}
+
+/* ==========================================================================
+   White Space
+   ========================================================================== */
+
+.mt-1 {
+  margin-top: 0.7rem;
+}
+
+.mt-2 {
+  margin-top: 1.4rem;
+}
+
+.mt-3 {
+  margin-top: 2.1rem;
+}
+
+.mt-4 {
+  margin-top: 2.8rem;
+}
+
+.mt-5 {
+  margin-top: 4.2rem;
 }
 
 /* ==========================================================================
@@ -102,11 +178,11 @@ blockquote {
 
 .top-nav,
 .bottom-nav {
-  padding: 0 2.5rem;
+  padding: 0 2.1rem;
 }
 
 .top-nav {
-  margin-top: 2rem;
+  margin-top: 1.4rem;
 }
 
 .bottom-nav {
@@ -115,16 +191,11 @@ blockquote {
 }
 
 article {
-  padding: 1rem 2.5rem;
+  padding: 1.4rem 2.1rem;
 }
 
 article :first-child {
   margin-top: 0;
-}
-
-.tmpl-post,
-.tmpl-home {
-  margin-top: 3rem;
 }
 
 .tmpl-post br {
@@ -137,8 +208,9 @@ article :first-child {
 
 /* Header */
 .home {
-  margin: 1rem 0;
-  font-size: 1em;
+  margin: 0;
+  font-size: 1rem;
+  margin-bottom: 2.1rem;
 }
 
 .home :link:not(:hover) {
@@ -183,13 +255,15 @@ article :first-child {
 
 /* Link List */
 ul.linklist {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
   list-style: none;
   padding-inline-start: 0;
 }
 
 ul.linklist h3 {
   font-weight: normal;
-  font-size: 15px;
+  line-height: 1.4rem;
   margin-bottom: 0;
 }
 
@@ -275,13 +349,15 @@ code {
     Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console",
     "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
     "Nimbus Mono L", "Courier New", Courier, monospace;
-  line-height: 1.5;
+  line-height: 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 300;
   background-color: var(--block);
 }
 
 pre {
-  font-size: 14px;
-  line-height: 1.375;
+  font-size: 1rem;
+  line-height: 1.4rem;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -338,26 +414,6 @@ code {
 /* ==========================================================================
    Utility Classes
    ========================================================================== */
-
-.mt-1 {
-  margin-top: 1rem;
-}
-
-.mt-2 {
-  margin-top: 2rem;
-}
-
-.mt-3 {
-  margin-top: 3rem;
-}
-
-.mt-4 {
-  margin-top: 4rem;
-}
-
-.mt-5 {
-  margin-top: 5rem;
-}
 
 .nodec {
   text-decoration: none;
@@ -440,5 +496,9 @@ code {
     --block: white;
     --darkblock: black;
     --placeholder: #f0f0f0;
+  }
+  @page {
+    margin-top: 4.2rem;
+    margin-bottom: 7rem;
   }
 }
