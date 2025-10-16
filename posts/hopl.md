@@ -3,6 +3,7 @@ title: The Human Only Public License
 description: A copyleft software license that restricts AI usage
 date: 2025-10-16
 layout: layouts/post.njk
+hn: https://news.ycombinator.com/item?id=45606028
 ---
 
 Whether artificial intelligence systems will end up being a positive or a
@@ -12,7 +13,7 @@ diluted humanity with only our dreams for escape. Although I am not yet convince
 of this worst case scenario, I believe it is important that we as software developers
 have at least the option to opt out of that system altogether, to be able to continue hacking,
 working, and tinkering in a space of our own in total absence of artificial intelligence
-systems, and share this luxury with our users. 
+systems, and share this luxury with our users.
 
 I designed a software license for this purpose, you can find the full text below. It
 is called the Human Only Public License, or HOPL for short.

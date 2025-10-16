@@ -3,6 +3,7 @@ title: Never Ever Use Content Addressable Storage
 description: Unless you really know what you are doing
 date: 2025-10-07
 layout: layouts/post.njk
+hn: https://news.ycombinator.com/item?id=45515133
 ---
 
 Content Addressable Storage (often abbreviated as CAS) is a technique to
