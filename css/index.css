@@ -189,6 +189,14 @@ time {
   margin-top: 6rem;
   margin-bottom: 3rem;
 }
+@media (max-width: 767px) {
+  .bottom-nav {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.7rem;
+  }
+}
 
 article {
   padding: 1.4rem 2.1rem;
@@ -251,6 +259,16 @@ article :first-child {
 
 .postlist-item-active .postlist-link {
   font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .postlist-item {
+    display: block;
+    margin-bottom: 0.7rem;
+  }
+  .postlist-date {
+    display: block;
+  }
 }
 
 /* Link List */
@@ -372,6 +390,8 @@ pre {
   hyphens: none;
   padding: 1em;
   margin: 0.5em 0;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 code {
@@ -380,6 +400,12 @@ code {
 
 .small-code pre code {
   font-size: 0.7rem;
+}
+@media (max-width: 767px) {
+  .small-code pre code {
+    font-size: 0.4rem;
+    line-height: 0.5rem;
+  }
 }
 
 /* Syntax Highlighting */
