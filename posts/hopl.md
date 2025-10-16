@@ -5,34 +5,40 @@ date: 2025-10-16
 layout: layouts/post.njk
 ---
 
-Wheter artificial intelligence system will end up being a positive or a
-negative force for humanity is still an open question. But I would like
-that we as software developpers have at least the option to opt out of
-artificial intelligence systems altogether, to be able to continue hacking,
-working, tinkering in a space of our own in total absence of artificial intelligence
-systems.
+Whether artificial intelligence systems will end up being a positive or a
+negative force for humanity is still an open question. But we might find ourselves
+one day with AI embedded at every layer of our existence, living lives of toned down and
+diluted humanity with only our dreams for escape. Although I am not yet convinced
+of this worst case scenario, I believe it is important that we as software developers
+have at least the option to opt out of that system altogether, to be able to continue hacking,
+working, and tinkering in a space of our own in total absence of artificial intelligence
+systems, and share this luxury with our users. 
 
 I designed a software license for this purpose, you can find the full text below. It
 is called the Human Only Public License, or HOPL for short.
 
 The idea is that any software published under this license would be forbidden to
-be used by AI. The scope of the AI ban is maximal. It is forbidden for AI to analyse
+be used by AI. The scope of the AI ban is maximal. It is forbidden for AI to analyze
 the source code, but also to use the software. Even indirect use of the software is
-forbidden. If for example such a backend system would include such software, it would
+forbidden. If, for example, a backend system were to include such software, it would
 be forbidden for AI to make requests to such a system.
 
-The burden of compliance is when possible put not on the end user of the software. If
+The burden of compliance is placed on AI systems and their users, not on software deployers. If
 you make a website using HOPL software, you are not breaking the license of the software
-if an AI bot scrapes it. The AI bot is in violation of your terms or service. It is sufficent
-for you as an user of the software to put a robots.txt that advertistes that the AI scraping
+if an AI bot scrapes it. The AI bot is in violation of your terms of service. It is sufficient
+for you as a user of the software to put a robots.txt that advertises that AI scraping
 or use is forbidden.
 
-Other than the anti AI provision, the license is maximally permissive, like a MIT license,
-but there is still a copyleft clause to make sure that derivative works are also ai restricted.
+Other than the anti-AI provision, the license is maximally permissive, like an MIT license,
+but there is still a copyleft clause to make sure that derivative works are also AI-restricted.
 
-I am not a legal expert so if you are I would welcome your suggestions for improvements. I
+What is this license good for? Anything! Any software, text, art, and more that you might have used an
+MIT license for will benefit from using the HOPL instead, if you want to prevent your work from
+being used by AI.
+
+I am not a legal expert, so if you are, I would welcome your suggestions for improvements. I
 didn't make this license just as a joke. I truly believe it is necessary that we have such a
-good license to foster and protect humans only online spaces.
+good license to foster and protect human-only online spaces.
 
 ```
 Human Only Public License (HOPL)
