@@ -45,6 +45,8 @@ On a last note, I am not a legal expert, so if you are, I would welcome your sug
 didn't make this license just as a joke. I truly believe it is necessary that we have such a
 good license to foster and protect human-only online spaces.
 
+_note: this license is also published on [github](https://github.com/fvdsn/hopl)_
+
 <div class='small-code mt-5'>
 
 ```
