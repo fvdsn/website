@@ -36,7 +36,12 @@ What is this license good for? Anything! Any software, text, art, and more that 
 MIT license for will benefit from using the HOPL instead, if you want to prevent your work from
 being used by AI.
 
-I am not a legal expert, so if you are, I would welcome your suggestions for improvements. I
+You might wonder as well, don't we already have robots.txt? How effective is this license? What I
+can tell you, from working at a large software corporation, is that while nobody cares about robots.txt,
+people care about licenses. There are automated tools to find and check software licenses and
+raise alarms if 'bad' ones are used. And I can guarantee that HOPL will brightly flash red.
+
+On a last note, I am not a legal expert, so if you are, I would welcome your suggestions for improvements. I
 didn't make this license just as a joke. I truly believe it is necessary that we have such a
 good license to foster and protect human-only online spaces.
 
