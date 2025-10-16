@@ -40,6 +40,8 @@ I am not a legal expert, so if you are, I would welcome your suggestions for imp
 didn't make this license just as a joke. I truly believe it is necessary that we have such a
 good license to foster and protect human-only online spaces.
 
+<div class='small-code mt-5'>
+
 ```
 Human Only Public License (HOPL)
 Version 1.0
@@ -156,4 +158,4 @@ furnished to do so, subject to the following conditions:
    terminates all rights granted under this license. Termination is permanent
    unless explicitly reinstated in writing by the copyright holder.
 ```
-
+</div>
