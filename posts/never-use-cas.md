@@ -29,7 +29,9 @@ harder to do correctly than eating the cost of storing duplicate files.
 And usually when CAS is considered as a solution, it's to solve the need of deduplicating
 files to save on storage. But even there, the good solution is to give files their own
 internal uuids as storage keys, store its hash alongside, and generate external uuids for each file upload,
-then use refcounts to handle the final delete.
+then use refcounts to handle the final delete. This requires a centralised transactional database which
+may not be suitable for the scale you are operating at. _A reader pointed out that there are algorithms
+for deleting these files on distributed systems, but that is out of the scope of this article._
 
 So if you're considering CAS as a quick solution to that problem, I want to mention that
 it is much easier to first store the files with uuids and no deduplication, then bolt on
