@@ -4,6 +4,15 @@
  */
 
 main {
+  --lightgray: #e0e0e0;
+  --gray: #c0c0c0;
+  --darkblue: #1d345e;
+  --white: #fff;
+  --link: #2e5eab;
+  --block: #f2f2fc;
+  --darkblock: #191923;
+  --placeholder: #f0f0f0;
+
   --color-prettylights-syntax-comment: #6e7781;
   --color-prettylights-syntax-constant: #0550ae;
   --color-prettylights-syntax-entity: #8250df;
@@ -60,7 +69,7 @@ main {
   --color-segmented-control-bg: #eaeef2;
   --color-segmented-control-button-bg: #fff;
   --color-segmented-control-button-selected-border: #8c959f;
-  --color-fg-default: #1f2328;
+  --color-fg-default: #1d345e;
   --color-fg-muted: #656d76;
   --color-fg-subtle: #6e7781;
   --color-canvas-default: #fff;
