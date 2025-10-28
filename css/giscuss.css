@@ -70,13 +70,13 @@ main {
   --color-segmented-control-button-bg: #fff;
   --color-segmented-control-button-selected-border: #8c959f;
   --color-fg-default: #1d345e;
-  --color-fg-muted: #656d76;
+  --color-fg-muted: #778cb2;
   --color-fg-subtle: #6e7781;
   --color-canvas-default: #fff;
   --color-canvas-overlay: #fff;
   --color-canvas-inset: #f6f8fa;
-  --color-canvas-subtle: #f6f8fa;
-  --color-border-default: #d0d7de;
+  --color-canvas-subtle: #f5f9fd;
+  --color-border-default: #dfe5ef;
   --color-border-muted: hsl(210deg 18% 87% / 100%);
   --color-neutral-muted: rgb(175 184 193 / 20%);
   --color-accent-fg: #0969da;
