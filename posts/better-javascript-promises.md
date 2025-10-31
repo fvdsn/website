@@ -13,7 +13,7 @@ hn: https://news.ycombinator.com/item?id=7647116
 >
 > The post makes mention of the concept of `Deferred` this was the popular name for the `Promise` class at the time,
 > and without `async` and `await`, we had to manually use `.then()` and `.pipe()` in our javascript code. This was a major
-> pain in the ass and the motivation behind the post. But this posts explores a completely different solution using dataflow programming, a feature of the Oz programming language that I really liked at the time.
+> pain in the ass and the motivation behind the post. But this post explores a completely different solution using dataflow programming, a feature of the Oz programming language that I really liked at the time.
 >
 > Good reading !
 
