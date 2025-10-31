@@ -11,6 +11,10 @@ hn: https://news.ycombinator.com/item?id=7647116
 > before async await became a thing, and before function coloring problem was given its name. This proposal
 > would have solved the async await problem without the coloring, but alas, it wasn't liked then.
 >
+> The post makes mention of the concept of `Deferred` this was the popular name for the `Promise` class at the time,
+> and without `async` and `await`, we had to manually use `.then()` and `.pipe()` in our javascript code. This was a major
+> pain in the ass and the motivation behind the post. But this posts explores a completely different solution than `async/await`, with dataflow programming, a feature of the Oz programming language that I really liked at the time.
+>
 > Good reading !
 
 If you ever had to port localStorage based code to IndexedDB you have been confronted to Javascript's biggest flaw; its asynchronous system is leaky. Once you have an asynchronous method, every other method that calls it must be asynchronous as well.
