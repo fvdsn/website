@@ -8,12 +8,14 @@ hn: https://news.ycombinator.com/item?id=7647116
 
 > This is a repost of an old article from 2014 that was lost in a blog migration but I think is still
 > relevant. It shows how differently the javascript promise problem could have been solved. This was written
-> before async await became a thing, and before function coloring problem was given its name. This proposal
+> before async await became a thing, and before the function coloring problem was given its name. This proposal
 > would have solved the promise problem without the coloring, but alas, it wasn't liked then.
 >
 > The post makes mention of the concept of `Deferred` this was the popular name for the `Promise` class at the time,
 > and without `async` and `await`, we had to manually use `.then()` and `.pipe()` in our javascript code. This was a major
 > pain in the ass and the motivation behind the post. But this post explores a completely different solution using dataflow programming, a feature of the Oz programming language that I really liked at the time.
+>
+> At the bottom of the article you can find a link to the original hackernews comments, they were as critical as you could expected from the orange website.
 >
 > Good reading !
 
