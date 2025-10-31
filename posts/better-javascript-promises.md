@@ -7,9 +7,9 @@ hn: https://news.ycombinator.com/item?id=7647116
 ---
 
 > This is a repost of an old article from 2014 that was lost in a blog migration but I think is still
-> relvant now to think about how different the javascript promise problem could have been solved. This was written
-> before async await became a thing, and before function coloring was identified as a problem. This proposal
-> would have solved the async await problem without the coloring, but alas, HN didn't like it at the time.
+> relevant. It shows how differently the javascript promise problem could have been solved. This was written
+> before async await became a thing, and before function coloring problem was given its name. This proposal
+> would have solved the async await problem without the coloring, but alas, it wasn't liked then.
 >
 > Good reading !
 
