@@ -8,43 +8,31 @@ image: /img/waiting.png
 
 <img src="/img/waiting.png">
 
-The diagram above represents an approximation of the process I have to go through to
-complete a programming task at work. By complete I mean from picking it up to be completely
-done with it. The process I follow is gitops + code review that I presume to be a quite modern
-industry standard. This process was tolerable last year, but now that I switched to agentic
-engineering, the coding part that took me 5 hours shrank to a bit more than one, and what remains
-is mostly waiting.
+The diagram above approximately represents the process I have to go through to complete a
+programming task at work. This is the result of using the standard workflow that GitHub and Gitlab
+recommend. Which means picking up an issue, making some code changes, creating a merge request for
+these changes, and getting the CI checks, and approval from my colleagues, before it is merged and
+automatically deployed.
 
-The worst part is that it's not the 'wait until tomorrow and do something else in the meantime' kind
-of waiting, but short, unpredictable waits that leave little room for doing something productive. There
-seems to be room for doing another task in parallel but the mental context switches for doing so are
-extremely taxing. There's also checking mails, meetings, and code reviews to be done but those don't fit
-neatly into the downtimes and there's still all the context switches.
+As you can see the process is grossly inefficient, most of the time on a task is spent waiting, either
+for the CI or for code reviews. The first reason for this state of affairs is that the
+coding part used to take a lot more time. When the coding was done by hand it would take me a whole 8h
+to get 500 lines of code out, now with agentic coding, I can get 1000 lines in an hour. The CI and review
+waiting times were acceptable overheads, but now they're the bulk of the "work".
 
-A few years ago programming meant being concentrated for long periods of times, taking walks to think and
-answering mails when you felt like taking a break. Now it's running node's task queue in your head and mine
-does not like it. I think simply dropping in agentic programming in the current workflow is not sustainable.
+The second reason is that the code review back and forth is by itself an extremely inefficient process.
+You do not know when you will get a review, and just one nitpick wastes a whole dev cycle.
 
-So how might a future agentic first workflow look like ?
+The fact that code reviews are inefficient is not new, and there are different strategies to go around them.
+On one hand you have pair programming and mob programming where the code is looked at by multiple people before
+it is even pushed. On the other hand you have reviews *after merge*.
 
-The agentic engineering part of the workflow itself is full of annoying waits already and there are two different schools
-that produce different kinds. In the first, the prompts are very specific and the AI produces little code
-in a relatively short time that is carefully reviewed. This is the workflow I am currently using, and for this way
-of working I do not necessarily desire smarter models, but faster, so that I can keep better focus. On the other hand
-the 'YOLO' school uses very high level prompts and lets the AI run unattended for longer, producing bigger diffs at once.
-The waiting time there are big enough to start other prompts in parallel, and that may be the definitive way to go once
-the models get better.
+In a review after merge process, the code is merged first, and reviews come later, with the changes implemented
+in new coding tasks. This means the original merge request is not blocked, and does not need multiple rebases
+and CI that are likelier to happen the longer the request is stuck in review. This seems like the most
+promising way to solve our efficiency problem for agentic coding, but the unfortunate part is that this requires appropriate
+tooling and neither Github nor its alternatives have put the appropriate tooling in place.
 
-Regardless of how you generate your code, the main bottleneck is in the code reviews. Agentic engineering produces too much
-code too fast to leave room for efficient review. And what's the point of reviewing code that hasn't been written by the
-engineer ? Hasn't the code actually already been reviewed by the agentic engineer, why wait for a second review ? Shouldn't we review the prompts instead ? One could imagine working with much bigger tasks and PR chunks, let's say 5K-10K line diffs, where we review the prompts and not the code. This way we keep the current way of working but with larger throughput per task.
-
-What I don't like about that way of thinking is that it leaves the review back and forth which also generates multiples CI runs for the same task, which is also starting to become a bottleneck. I also think smaller tasks, smaller diffs, and quicker iteration time are all good things, and there's an opportunity to make the cycle time even faster.
-
-We could completely drop manual reviews. The CI would have an agentic code quality gateway that would do the job of the 'is this good enough to go to prod' part of the review. And if the agentic coding tool is configured in the same way as the quality gateway, it is unlikely to be triggered and cause repeated CI back and forth.
-
-The 'is this the maintainable way to do things' part of the review would be done asynchronously, post deploy, in the Slack channel and not in the diffs, and the agreed upon fix would be done as another independent task later on.
-
-That leaves unsolved the problem of developers being confused about the requirements of the task and making functionally nonsensical changes. This is often currently caught at code review, but since not being confused about requirements is almost becoming the dev's last remaining task, this might be better solved at performance reviews.
-
-In any case any solution will require big changes to the PR pipeline tools like github and gitlab. I am surprised there is so much work being done on the code generation and so little on the rest of the pipeline while that part is now clearly the bottleneck.
+I can say I am a bit surprised, given how much work is being done to speed up the code generation that
+Github and co keep pushing a merge workflow so obsolete that it is now the main bottleneck in development work.
+In the meantime if you have any solution I would be happy to hear about it in the comments.
