@@ -69,7 +69,7 @@
                 {{ content | safe }}
             </article>
 
-            {% if page.url != '/' %}
+            {% if (page.url != '/' and page.url != '/posts/') %}
             <footer class='bottom-nav noprint'>
                 <span class='navlink'>[ <a href="{{ '/' | url }}" class="nodec">home</a> ]</span>
                 <span class='fr'>
