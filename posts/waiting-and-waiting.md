@@ -1,5 +1,5 @@
 ---
-title: I Spend Most of My Time At Work Waiting for the AI, the CI and Code Reviews
+title: AI Writes Code Fast, Human Reviewers Can't Keep Up
 description: Agentic coding sped up coding so much that all that remains is waiting.
 date: 2025-11-06
 layout: layouts/post.njk
@@ -32,6 +32,10 @@ in new coding tasks. This means the original merge request is not blocked, and d
 and CI that are likelier to happen the longer the request is stuck in review. This seems like the most
 promising way to solve our efficiency problem for agentic coding, but the unfortunate part is that this requires appropriate
 tooling and neither Github nor its alternatives have put the appropriate tooling in place.
+
+But even adopting post merge review might not entirely solve the problem, simply because a single dev can now
+generate more code than can be humanly reviewed by the rest of the team. Maybe we should start to review prompts
+instead ?
 
 I can say I am a bit surprised, given how much work is being done to speed up the code generation that
 Github and co keep pushing a merge workflow so obsolete that it is now the main bottleneck in development work.
