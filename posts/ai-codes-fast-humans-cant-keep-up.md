@@ -27,6 +27,17 @@ The fact that code reviews are inefficient is not new, and there are different s
 On one hand you have pair programming and mob programming where the code is looked at by multiple people before
 it is even pushed. On the other hand you have reviews *after merge*.
 
+In review after merge process, the code is merged first, and reviews come later, with the review fixes implemented
+in new coding tasks. The go
+
+
+
+Manual pre-merge reviews achieve multiple goals in one single gatekeeping step. They
+check for regressions and critical defects, but also long term maintainability and knowledge sharing among devs. With
+the right tooling and unit test coverage, the check for regressions and critical defects can be automated, leaving only
+the discussions about long term maintainability and knowledge sharing as manual tasks. And there's nothing that critical
+about those that require blocking the merge.
+
 In a review after merge process, the code is merged first, and reviews come later, with the changes implemented
 in new coding tasks. This means the original merge request is not blocked, and does not need multiple rebases
 and CI that are likelier to happen the longer the request is stuck in review. This seems like the most

@@ -1,5 +1,5 @@
 ---
-title: How To Synchronize Data Between Two Services, An Exhaustive Guide
+title: Eventual Consistency From First Principles
 description: Having the same data in two services is harder than it looks, here's how to do it.
 date: 2025-11-21
 layout: layouts/post.njk
@@ -21,13 +21,37 @@ a user has been sent a password reset email. This seems simple enough but the tw
 The two basic ways to do this are to either record the status before or after sending the email. The main problem with both approaches
 is that making a network call can fail in various unpredictable ways. So if the first operation succeeds and the second fails, you
 are left with an inconsistent state where either the mail has been sent, but the status hasn't been recorded, or the status has been
-recorded but the mail hasn't been sent. But don't worry, it is possible to guarantee to have both operations succeed, you just have to
-use a completely different approach, and this is the whole point of this lengthy article.
+recorded but the mail hasn't been sent.
 
 <img class='wide schema' src="/img/eventual-consistency/send-mail-2.png">
 
-Before going further, we need to dive a bit deeper into the nature of the failures of networked calls,
-because those failures are unavoidable, and we'll have to work with them.
+## Eventual Consistency
+
+If both sending the mail and recording the fact touched the same database, we could wrap them in a transaction. Either both succeed or both fail atomically. This guarantee of immediate, all-or-nothing
+  consistency is called *strong consistency*.
+
+The current solution to our mail sending problem, where there is a random chance that the state of both of our services
+diverge and never reconcile, is on the other hand qualified as having *no consistency guarantee*. The problem with such
+a system goes far beyond what you can imagine from the toy email sending problem. In our case an email doesn't get sent, is that the end of the world? But what happens in the general case, when truth starts to diverge between your different services is akin to data corruption. Service `A` thinks `A`, Service `B` thinks `B`. Which one is correct? Imagine a system where a small demon randomly reverts some of your database transactions. This is what it means to have no
+consistency guarantees.
+
+Databases and their consistency guarantees are small miracles that have served us extremely well, but unfortunately
+the world of backend development is moving away from the comfort of single database systems. Many of the now essential
+pieces of technology that we use are now only available through network calls, as *services*. This isn't even a story
+about microservices, although they exacerbate the problem. Are you using S3? Third party auth? You now have a distributed system and all the associated problems.
+
+Unfortunately achieving strong consistency across multiple services is prohibitively expensive and thus rarely implemented. But there
+is an in-between situation, where we accept that while for some period of time, the data between the system might diverge,
+eventually, after some time, it will converge and become consistent. We cannot guarantee that the mail is sent and the
+fact recorded at once, but we can guarantee, that if we are a bit patient, both will happen. We call that *eventual consistency*. And that is much easier (although still difficult!) to achieve.
+
+My goal for this article is that you will learn not only all you need to know to build reliable and eventually consistent systems, but also *why* things are done the way they are. Because let's face it, the first version of
+your backend will not be eventually consistent, as it is hard, but eventually, it will have to be.
+
+This article is also quite long, as eventual consistency is not just the application of a simple algorithm, but
+a holistic design approach that your entire stack from infrastructure to API design must support.
+
+So let's start from the root cause of the issue, the failure of an inter-service network call.
 
 ## On the many ways an inter-service network call can fail
 
@@ -45,74 +69,129 @@ But on a network and processing level the separation is more blurry. There are u
 
 The reason I mention this is that it is important to realize that network level failures happen at that level, not at the logical level indicated by the schematics, and can thus happen at any time, without regard of the logical boundaries of the flow of a call. But since all our next discussions will use these higher level call diagrams, I will attempt to map the different errors at the logical boundaries.
 
-So the diagram below represents a simple call from one service to another, along with the logical failure points.
+
+### Anatomy of an HTTP request
+
+The following piece of code is an example of a usual HTTP POST call to a service. The code is
+quite simple on the surface, but that is only because it abstracts an immense amount of work that happens behind the scenes, and it is there that the errors happen. Rather than giving you a list of
+the possible errors I'd like to look underneath and go step by step through what is going on and what can fail.
+
+```js
+const res = await fetch('https://serviceY.com/api/send', {
+  method: 'POST',
+  headers: {
+    'API-KEY': 'abcdef',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+      recipient: 'customer@example.com',
+      subject: 'Thank you for signing up!',
+      htmlBody: '<h1> ....',
+  }),
+})
+```
+
+While we go through the request, I would like you to keep in mind the following diagram which
+represents a logical view of the request along with some interesting failure points, where multiple
+different failures have the same effect on the consistency properties of the system.
 
 <img class='schema' src="/img/eventual-consistency/rpc-failures.png">
 
-We often hear that network calls can fail, due to the "network being down", but in reality the nature of
-the failure is much more diverse, and often due to higher-level issues rather than physical network outages. An
-inter service call is a beast that involves almost all the layers of the network and application stack and
-failure can happen at any of the layers in various and exciting ways. At the end of this article we will
-reach different solutions that can abstract those away into a reliable channel, and we will be able to forget
-about all these, but in the meantime we need to have at least a good idea of what they are so that we can
-design a solution around them. So let's go failure point by failure point, and enumerate the different failure
-modes for each. I hope you will forgive me for not going too much in depth with any of them.
+So let's follow our request, from DNS lookup to processing the response. Each section will refer to a specific point
+of the diagram.
 
-### A. The other service is unreachable.
+#### Establishing a connection and reaching the server (`A`)
 
-Our first packet hasn't even reached the server of the other service but many things can already go wrong. All
-of these errors are what's usually called 'the network being down'.
+The first thing the call needs to do is to open a TCP/IP connection to the target server. And in
+order to do that, it needs to know the IP address of that server. In our example we didn't refer to
+the server by its IP but by a domain name instead. So we need to get the IP of that domain name. This
+is done by contacting the DNS server that contains a mapping of domain names and IPs. This is where
+the first failure can occur. The DNS server might be unreachable, or not know the domain. Not every HTTP call performs a DNS request though, as the DNS entries are locally cached. This introduces another source
+of error, as the local cache might contain an outdated IP for the domain.
 
-- The DNS is down and you can't get the IP of the target server
-- The DNS is misconfigured and you can't get the right IP
-- You're getting stale IP from the DNS cache
-- The IP is unreachable due to network misconfiguration
-- The packets are blocked by a misconfigured firewall
-- The packets are dropped because the network is overloaded
-- The packets are dropped by a network level rate limiting system
+Once we have the correct IP we will send TCP packets to the target IP in order to establish a connection. The packets might have to go through many intermediate switches, proxies, and this is
+where the second failures can happen. There might simply not be a well configured network path from our origin to the target server, and thus the packets will never arrive. Another possibility is that
+the path is well established but so busy with network traffic that the intermediate nodes stop forwarding our packets. Lastly our packets might have to pass through a misconfigured firewall that has banned our origin IP from going through.
 
-### B. The other service refuses your call
+After the packets reach the right server IP, the packets are only processed if the server
+is actively listening for packets on the specific port specified in the packets. The port is usually
+defined in the target URL, but is omitted in our example, so the default port for the protocol
+is used. For `https` it is `443`, for `http` it is `80`.
 
-It's not because your packet reached the right IP that the call is accepted. Many things can yet go wrong.
+Since we used the `https` protocol, the next step is to establish a TLS connection on top of the TCP one. Without going into too much detail, this too can fail for multiple reasons. There can be a mismatch between the supported TLS versions between what both services support. Or there might be an error with the certificates.
 
-- The server is down
-- The server is up, but not yet ready to accept connections
-- There is a protocol capability mismatch (HTTP / TLS) between the two services
-- The credentials are wrong
-- The call is dropped by rate limits
-- The payload of the call is refused by the application. This can happen because you're hitting an incompatible
-  version of the service in a continuous deployment scenario.
+We now have established the network connection to the target server.
 
-### C, D. One service stops during the call.
+Note that at this point we haven't yet established an HTTP connection, so the errors will not be set on the http response object `res` but instead be raised as exceptions.
 
-For the call to succeed both services need to stay up and available during the entire duration of the call, but this is not something that
-can be guaranteed
+#### Getting your call accepted by the service (`B`)
 
-- A service crashes due to application level failure.
-- A service is killed due to excessive resource usage
-- A service is shut down by the auto scaler / scheduler
-- A service has an application level timeout for the call duration
+After the connection is established, the HTTP payload can be sent. It will contain the path `/api/send`, the method `POST`, the headers, and the body. The HTTP server will parse the payload and forward it
+to the application.
 
-### E. The connection drops during the call
+Sending the HTTP payload can take multiple TCP packets and the first error that can happen is that
+the connection is interrupted before the full HTTP payload can be sent. The called service will wait for the packets until it timeouts, and the caller service will wait for a response until a timeout as well.
 
-We often see in network call diagrams a return line after the end of remote processing, as if the third
-party network was waiting to complete its task before sending the first packet of his response, but this
-is not accurate. The connection is in fact open during the whole duration of the call, and packets are
-transmitted back and forth for its whole duration. What this kind of error represents is that the connection
-drops after the connection has been established, and parts of the return response never arrive. This is more
-likely to happen for large responses that take a long time to transmit. Here are some reasons why this could happen
+At this point the HTTP connection is well established and most errors will be returned as `HTTP` errors. Those errors will be made available to the caller as a status code on the `res` object, not as exceptions.
 
-- A proxy between the services has a timeout on request duration and closes the connection prematurely
-- NAT mapping drops
-- Network topology changes mid connection
-- Overloaded network starts dropping packets
-- Overloaded server drops the connection
+The called service will not wait until the full HTTP payload has been received but will start to process the parts
+as it gets them, and can already returns some HTTP errors. A first one could be a `503 Service Unavailable`, if the server is too busy or is still starting up and still unable to process requests. The server might also look at the
+origin IP address of the request and decide that it is sending too many requests and reject it with a `429`
 
-### F. The caller refuses the response
+Then the server might reject the request based on some parameter values, for example the `path` or the `method` might be rejected as `404` or `405`. Then the authentication headers might be rejected as a `401`.
+The body is then parsed as JSON due to the `Content-Type` header. It might then reject the body if the content is not correctly encoded.
 
-There is one last thing that can go wrong and that is the application being unable to process the response payload correctly.
-Maybe the caller didn't expect a field being null, or is surprised by the presence of a new field. These are application level
-bugs, not network errors, but the end result is the same, the call did not get through successfully.
+So far everything that has happened has probably been handled by the HTTP server framework used to develop the
+service and is not really visible by the application business layer.
+
+Once the JSON payload is fully received and decoded, it is forwarded to the application code. The first thing that is
+usually done is a business application level validation of the body and path, where it will look at the structure and formatting of their content, and might still reject them as `400 Bad Request`.
+
+All these errors happen on the point `B` of the network call diagram. The request has been correctly received but hasn't had any chance to have any business effect. There are many more errors that can happen
+than we have listed, if you want a full list you can have a look at the [`4xx` error codes on the HTTP specification](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status#client_error_responses)
+
+#### The call is processed by the server (`C`)
+
+The server has now accepted the call and validated its parameters. It will now do the business job we asked it to do.
+Any error that might happen from now on induces a new kind of problem. They happen after the job or some of the job has
+been done. This is an important distinction because as we will see later, our strategy in face of errors will be to
+retry the call, but when we retry for the errors that happen from now on, the job will be done twice. This is why
+the previous step of validating the request and the payload is so extensive. We usually want to validate it so well
+that if accepted it is guaranteed to succeed. But is such a guarantee possible? Let's see how the server processes the call.
+
+What the server does to process the call varies entirely based on the job it has to do. But we can introduce some
+generalities. Usually the processing will be a combination of CPU computation, of database requests, and network requests. For example in our case of sending an email, we will probably make a request to a postfix server.
+
+Database or network requests might not always be HTTP calls but they face similar connection and timeout issues. The CPU computation is not prone to network error but can enter invalid states and
+trigger exceptions.
+
+Whatever the nature of the error, network or not, failures at this point are unexpected and usually trigger a `500` response.
+
+Processing the request also takes time, and during this time, events outside our business application control might shut down our server and trigger errors. Depending on how sudden the shut down, the server might have the chance to
+respond with a `500` but might also leave the caller hanging and timeout. Common sources of shut downs are the memory limit being reached on the server machine, or the server being killed by the infrastructure scheduler, for example to relocate the server process on another machine.
+
+The processing of the call might also simply take too long and be terminated by the application server framework to leave room for other requests.
+
+So to answer our previous question, no it is not possible to guarantee a successful call just from validating its input, as what happens after validation can never entirely be predicted. The `500` status expresses just that, the event of an unexpected error.
+
+#### The wait for the response (`D`)
+
+While the server is processing our request, the calling service waits for the response. Once again, during the wait
+for the response, events outside of the application control might trigger a shut down of the service, and the service
+will thus never see the response. There is also usually a time limit for how long the service will wait for the response, and if it doesn't come before the deadline, the service will bail out and never see the response.
+
+#### The transmission of the response (`E`)
+
+After the server has done its job, and if the caller is still there to listen, the server will start to send the response. The errors that happen at this point are any combination of the previous errors; either one or the other service being shut down, or the network stopping working during the transmission. Even if the network is not fully down, a slow network might cause the sending of the response to take too long, which might trigger timeouts at either side.
+
+Processing wise, the transmission of the response is not something fully separated from the processing of the job, the
+distinction is more conceptual. At this point the job has been fully done and committed, and a retry of the call will
+surely do the job twice.
+
+#### Accepting the response (`F`)
+
+After the response has been sent, the calling service will usually need to parse it to extract meaningful information.
+A common error at this point is that the format or the size of the response is not what was expected by the caller making its successful processing impossible.
 
 ## Minimizing Errors
 
@@ -193,7 +272,6 @@ Here is an example of a structured log that you might want to emit for every inc
 ```
 
 ## Idempotency
-
 
 In the previous section we listed all the good practices to minimise the source of
 errors for inter-service calls. But in doing so we gained something else. We made all
