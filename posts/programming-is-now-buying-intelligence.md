@@ -1,7 +1,7 @@
 ---
 title: My Programming Job Has Become An Intelligence Buying Job
 description: Intelligence is now a commodity, our task is to use it efficiently
-date: 2025-11-06
+date: 2026-02-06
 layout: layouts/post.njk
 ---
 
