@@ -195,6 +195,92 @@ A common error at this point is that the format or the size of the response is n
 
 ## Minimizing Errors
 
+After this in-depth look at the inside of a request, and the various errors that might make it fail, we can take
+a step back and look at the errors from a broader point of view. We should not treat all these errors as random
+occurrences, rather their presence or their absence depend on factors that are under our control, and we can design
+our system to minimize their occurrences.
+
+And since our strategy in face of errors will be to retry the calls, the other very important property that we want
+them to have is transience. They should eventually disappear on their own without external intervention, so that with
+enough retries, the call will eventually succeed.
+
+### Errors from configuration changes
+
+A common source of DNS and Authentication issues is not due to systems unavailability but rather from configuration changes. When a server's IP address is changed, the change needs to be applied to the DNS server, and the DNS records should propagate. The same goes with authentication credentials, when they are rotated the applications need to be
+made aware so that they can get the new credentials.
+
+Configuration changes are an inevitable part of application development and there is no point in trying to minimize the changes themselves, rather the system should be resilient to such changes so that they can be made often and without fear.
+
+These days, most services are designed using the [twelve factors app principles](https://12factor.net/) which stipulates
+that configuration should be done using environment variables. In practice that means that the service configuration
+is loaded statically at application startup and does not evolve during the application lifetime.
+
+This is not a problem in itself, it simply means that your application servers should not be left running for too long, but should instead be frequently restarted so that they can get fresh configuration values. This approach is much easier to get correct than to have long running servers that attempt to dynamically update their configuration
+during their lifetime, especially as some of these configurations can end up in hard to invalidate caches. Restarting
+the entire application solves that problem in one go.
+
+This has further implications, a system that restarts often, should also start fast. But these are easy properties to
+have if you plan for them from the start.
+
+Even if your servers restart often, they might still end up with stale credentials during their short lifetimes, and
+those might make the server entirely inoperable. For example, outdated database credentials will prevent the
+server from doing any work. The solution is upon detection of such outdated credentials to immediately terminate the
+server so that a new fresh one can be started.
+
+Nowadays cloud providers provide various server runtime abstractions such as lambda functions or managed container
+deployments. Those services usually have a server lifetime limitation of a few minutes. Rather than as an annoying limitation
+you should see it as an enforcement of good practices.
+
+Most service orchestrators also support health check endpoints that are
+used by the orchestrator to determine which servers can get traffic. It is a good idea for your health check endpoint to actively test all the configuration settings upfront, for example by making a simple database request. This way
+the orchestrator has an idea not only if the new service is running, but if it is able to do the work it is supposed to do.
+
+If such health check endpoints are in place, an easy strategy to change configuration appears. First deploy a new
+version of the service with the new configuration settings. Its health check will fail and will not receive traffic. Then apply the configuration changes. The old services will stop working but the new version will already be available
+to pick up the work.
+
+### Errors from increasing load
+
+<img class='schema' src="/img/eventual-consistency/load.png">
+
+Under heavy load, services fail in predictable ways: `503 Service Unavailable`, connection timeouts, or crashes from resource exhaustion.
+In ancient times, the solution to this issue was overprovisioning. Look at your maximum
+traffic and make your server big enough to handle that. But this approach is not only wasteful, it also plays badly
+with the above advice for managing your servers lifecycles.
+
+Nowadays the approach to solve resource availability is based on auto-scaling. A service orchestrator looks at the
+resource consumption statistics of your system and decides to either add, or remove servers from the system. This
+makes the load errors transient, wait enough time and the load errors will resolve themselves with the increased capacity to handle the requests.
+
+The strategy used by the auto-scaling orchestrator is entirely dependent on which technology you use to deploy your
+services. AWS Lambda for example has its own undocumented policy based on requests. Managed container deployment
+services such as AWS ECS will use container metrics such as memory and CPU consumption. K8s will let you implement your own policy based on the metrics of your choice.
+
+The best metric to scale on is the number of requests as it is a leading indicator of the load. CPU and Memory usage are not only lagging indicators but they also fail to capture IO bottlenecks.
+
+You should empirically measure the amount of requests one server can reasonably handle and configure the orchestrator
+to scale when 80% of that number is reached for a certain duration, a good default would be 30 seconds.
+
+Another crucial part, not for your system health but for your wallet, is to set some reasonable maximum scaling limits
+to avoid unpayable bills from extreme load events.
+
+An auto scaler can also scale down to zero, but this means incoming requests will suffer from cold start delays
+if there is no instance running when a request arrives. You should probably leave a minimum number of instances running
+for your production configuration. Nowadays even lambdas can have minimal provisioning settings. Scaling to zero is otherwise great for development environments, or when the requests are made in async event workflows where latency is less of an issue.
+
+Scaling down should also be configured carefully. Experience shows that it should be configured to scale down slower
+than the scale up as bursts of traffic tend to come in a row. If the scale up happens after 30 seconds, consider waiting 5 minutes before scaling down.
+
+The other issue to keep in mind is that scaling down is done by terminating the server, which might interrupt its work in progress. Usually you will receive a scale down signal (`SIGTERM`) that you can use to gracefully terminate the job before the server is really shut down. At this point you should stop accepting new requests and wait for the currently
+running request to complete. This strategy however doesn't work with long running requests, a good reason among many to avoid them, as we will now see in more details.
+
+### Errors from long requests.
+
+
+
+
+The other important property we want from our errors, should they arrise, is that they are transient, meaning th
+
 If we look at those errors from a bit of a higher level we find that they belong to a few different categories
 
 - Network configuration changes
