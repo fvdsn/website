@@ -3,6 +3,7 @@ title: Eventual Consistency From First Principles
 description: Having the same data in two services is harder than it looks, here's how to do it.
 date: 2025-11-21
 layout: layouts/post.njk
+draft: true
 ---
 
 In this article I want to talk about a ubiquitous problem in computer engineering that seems trivial

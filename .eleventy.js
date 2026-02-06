@@ -59,6 +59,12 @@ module.exports = function(eleventyConfig) {
     return filterTagList([...tagSet]);
   });
 
+  // Exclude drafts from collections and output
+  eleventyConfig.addGlobalData("eleventyComputed", {
+    permalink: data => data.draft ? false : data.permalink,
+    eleventyExcludeFromCollections: data => data.draft ? true : data.eleventyExcludeFromCollections,
+  });
+
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
