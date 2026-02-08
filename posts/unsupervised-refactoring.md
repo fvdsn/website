@@ -39,6 +39,8 @@ This allows you to run Claude unsupervised on tasks bigger than one session can 
 
 The same prompt is used at every step:
 
+<div class='wide-code small-code'>
+
 ```markdown
 # REFACTORING.md
 
@@ -63,6 +65,8 @@ Hello, we are about to refactor this codebase to cleanup the code. Here's the pl
           - 2.2.3: If there is no more refactoring to be done, notify me with 'say "I am done with refactoring"'
 ```
 
+</div>
+
 There's some important things to note about this prompt:
 
  - We load the whole application code into the context before doing anything. This not
@@ -81,8 +85,10 @@ There's some important things to note about this prompt:
    experience that Claude will do that on its own unprompted.
 
 I then ran this prompt in a loop using the following script. It looks a bit more complex
-than it really is. It just runs Claude Code in yolo mode in a loop. The `jq` part is
-there to print its ongoing progress, without it the script works silently.
+than it really is. It just runs Claude Code in yolo mode in a loop. The large `jq` part is
+there to parse the json event stream and print it in a humanly readable way. 
+
+<div class='wide-code small-code'>
 
 ```bash
 #!/usr/bin/env bash
@@ -112,6 +118,8 @@ while true; do
 done
 
 ```
+
+</div>
 
 ## What it did
 
