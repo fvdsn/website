@@ -198,8 +198,8 @@ to identify what clean means for that codebase.
 And the agent doesn't know when to stop. As iterations went on, the changes became less
 and less meaningful and less and less focused on the criteria in the prompt. The agent
 wants to be helpful, so at every step it will find work to do, even past the point
-where it makes any sense. I have seen this in many other unsupervised agentic coding
-applications, and I would love to hear your solutions for that problem.
+where it makes any sense. I have seen this behavior in many other unsupervised agentic coding
+experiments, and I would love to hear your solutions for that problem.
 
 Still, the model did in about two hours what would have taken me much longer in any
 other way. Even with the time required for reviewing the changes, this was a huge
