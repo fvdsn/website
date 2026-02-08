@@ -164,8 +164,7 @@ I caught it because I reviewed each commit individually, and because I was aware
 that fragile section of the code. If I hadn't, it would have gone to production.
 
 This is the thing with unsupervised refactoring. The agent can encounter your existing
-footguns and pull the trigger. Poorly written code doesn't just fail to communicate
-intent to the model, it actively misleads it.
+footguns and pull the trigger. Bang!
 
 ## What made it possible
 
@@ -192,7 +191,7 @@ like automated code formatting.
 We're not there yet. Two things are missing.
 
 You need to give direction. The refactoring principles are specific to each project's
-goals and technology choices. You could encode them in an AGENTS.md, but there is no
+goals and technology choices. You could encode them in an `AGENTS.md`, but there is no
 universal *make my codebase clean* prompt. Someone who understands the code still needs
 to identify what clean means for that codebase.
 
