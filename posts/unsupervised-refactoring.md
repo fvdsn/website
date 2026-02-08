@@ -50,7 +50,7 @@ Hello, we are about to refactor this codebase to cleanup the code. Here's the pl
           - 2.1.1. Refactor the code according to the task description.
           - 2.1.2. Commit the changes to git.
           - 2.1.3  Remove the task from TASKS.md
-          - 2.1.3. You are done. Do NOT pick and process another task.
+          - 2.1.4. You are done. Do NOT pick and process another task.
       - 2.2. If it doesn't exist or is empty:
           - 2.2.1. Identify the parts of the code that could be refactored, following the following principles
               - A class should have a single responsibility
